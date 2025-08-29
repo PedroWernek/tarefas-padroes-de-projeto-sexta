@@ -1,0 +1,1 @@
+# tarefas-padroes-de-projeto-sexta

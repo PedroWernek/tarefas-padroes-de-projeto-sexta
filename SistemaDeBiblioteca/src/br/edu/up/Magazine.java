@@ -9,8 +9,7 @@ public class Magazine extends LibraryItem {
     }
 
     @Override
-    public void borrow(ILibraryFactory factory, User user) {
-        Borrowable item = factory.create();
+    public void borrow(Borrowable item, User user) {
         user.borrowedItems.add(item);
     }
 

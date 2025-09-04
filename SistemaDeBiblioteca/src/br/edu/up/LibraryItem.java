@@ -1,0 +1,14 @@
+package br.edu.up;
+
+public abstract class LibraryItem implements Borrowable {
+
+    public String title;
+    public String author;
+    public String publicationYear;
+
+    @Override
+    public abstract void borrow();
+
+    @Override
+    public abstract void returnItem();
+}

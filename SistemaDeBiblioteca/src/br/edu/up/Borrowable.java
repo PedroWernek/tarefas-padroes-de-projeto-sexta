@@ -2,7 +2,7 @@ package br.edu.up;
 
 public interface Borrowable {
 
-    void borrow();
+    void borrow(ILibraryFactory factory, User user);
 
-    void returnItem();
+    void returnItem(Borrowable item, User user);
 }

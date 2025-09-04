@@ -9,15 +9,14 @@ public class Magazine extends LibraryItem {
     }
 
     @Override
-    public void borrow() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'borrow'");
+    public void borrow(ILibraryFactory factory, User user) {
+        Borrowable item = factory.create();
+        user.borrowedItems.add(item);
     }
 
     @Override
-    public void returnItem() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'returnItem'");
+    public void returnItem(Borrowable item, User user) {
+        user.borrowedItems.remove(user.borrowedItems.indexOf(item));
     }
 
 }

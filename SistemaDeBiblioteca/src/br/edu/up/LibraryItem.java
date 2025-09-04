@@ -7,8 +7,9 @@ public abstract class LibraryItem implements Borrowable {
     public String publicationYear;
 
     @Override
-    public abstract void borrow();
+    public abstract void borrow(ILibraryFactory factory, User user);
 
     @Override
-    public abstract void returnItem();
+    public abstract void returnItem(Borrowable item, User user);
+
 }

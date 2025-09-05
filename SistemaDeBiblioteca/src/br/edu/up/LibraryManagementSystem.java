@@ -13,7 +13,7 @@ public class LibraryManagementSystem {
         user.borrow(digitalMidia);
 
         user.returnItem(book);
-        user.returnItem(book);
-        user.returnItem(book);
+        user.returnItem(magazine);
+        user.returnItem(digitalMidia);
     }
 }

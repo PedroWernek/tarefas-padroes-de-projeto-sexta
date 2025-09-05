@@ -5,7 +5,7 @@ public class DigitalMedia extends LibraryItem {
     public String fileFormat;
 
     public void play() {
-
+        System.out.println("Playing:" + super.title + this.fileFormat + "\nAuthor:" + super.author);
     }
 
     @Override

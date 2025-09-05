@@ -1,6 +1,6 @@
 package br.edu.up;
 
-public class BookFactory implements ILibraryFactory {
+public class BookFactory implements IFactoryBorrowable {
 
     @Override
     public Borrowable create() {

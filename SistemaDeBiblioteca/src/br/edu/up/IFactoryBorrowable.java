@@ -1,6 +1,6 @@
 package br.edu.up;
 
-public interface ILibraryFactory {
+public interface IFactoryBorrowable {
 
     public Borrowable create();
 }

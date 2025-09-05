@@ -5,6 +5,7 @@ public class Book extends LibraryItem {
     public String genre;
 
     public void readSample() {
+        System.out.println(super.title + "\nAuthor:" + super.author + "\nPublication Year:" + super.publicationYear + "Genre:" + this.genre);
     }
 
     @Override

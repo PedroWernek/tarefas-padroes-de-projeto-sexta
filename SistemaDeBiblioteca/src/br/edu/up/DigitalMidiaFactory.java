@@ -3,7 +3,7 @@ package br.edu.up;
 public class DigitalMidiaFactory implements IFactoryBorrowable {
 
     @Override
-    public Borrowable create() {
+    public IBorrowable create() {
         return new DigitalMedia();
     }
 

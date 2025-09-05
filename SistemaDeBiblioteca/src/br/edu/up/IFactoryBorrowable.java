@@ -2,5 +2,5 @@ package br.edu.up;
 
 public interface IFactoryBorrowable {
 
-    public Borrowable create();
+    IBorrowable create();
 }

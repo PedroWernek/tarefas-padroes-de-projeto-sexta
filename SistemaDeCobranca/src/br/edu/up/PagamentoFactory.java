@@ -2,5 +2,5 @@ package br.edu.up;
 
 public abstract class PagamentoFactory {
 
-    public abstract IPagamento criarPagamento();
+    public abstract IPagamento criarPagamento() throws Exception;
 }

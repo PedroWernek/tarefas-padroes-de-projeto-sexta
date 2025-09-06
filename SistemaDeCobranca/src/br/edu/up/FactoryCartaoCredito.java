@@ -2,15 +2,17 @@ package br.edu.up;
 
 public class FactoryCartaoCredito extends PagamentoFactory {
 
-    private final int numCartao;
+    private final String numCartao;
 
-    public FactoryCartaoCredito(int numCartao) {
+    public FactoryCartaoCredito(String numCartao) {
         this.numCartao = numCartao;
     }
 
     @Override
-    public IPagamento criarPagamento() {
-        return new PagamentoCartaoCredito(this.numCartao);
+    public IPagamento criarPagamento() throws Exception{
+
+            return new PagamentoCartaoCredito(this.numCartao);
+
     }
 
 }

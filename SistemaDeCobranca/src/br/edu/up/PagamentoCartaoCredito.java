@@ -2,20 +2,23 @@ package br.edu.up;
 
 public class PagamentoCartaoCredito implements IPagamento {
 
-    public int numCartao;
+    public String numCartao;
 
-    public PagamentoCartaoCredito(int numCartao) {
-        this.numCartao = numCartao;
+    public PagamentoCartaoCredito(String numCartao) throws Exception{
+        if(!validacao()){
+            throw new Exception("numero inválido");
+        }
+            this.numCartao = numCartao;
     }
 
     @Override
-    public boolean processarPagamento(double valorDaTransação) {
-        return validacao();
+    public boolean processarPagamento(double valorDaTransacao) {
+        return true;
     }
 
     @Override
-    public boolean validacao() {
-        return this.numCartao == 16;
+    public final boolean validacao() {
+        return this.numCartao.length() == 16;
     }
 
 }

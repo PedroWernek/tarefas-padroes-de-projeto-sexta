@@ -6,7 +6,7 @@ public class Main {
         PagamentoService cliente = new PagamentoService();
 
         double valorDaTransacao = 1000;
-        PagamentoFactory pagamentoFactory = new FactoryCartaoCredito();
+        PagamentoFactory pagamentoFactory = new FactoryCartaoCredito(137587453);
 
         cliente.processarPagamento(pagamentoFactory, valorDaTransacao);
         // como que eu faço para colocar o email dentro do Paypal?

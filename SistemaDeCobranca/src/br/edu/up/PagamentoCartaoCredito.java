@@ -4,6 +4,10 @@ public class PagamentoCartaoCredito implements IPagamento {
 
     public int numCartao;
 
+    public PagamentoCartaoCredito(int numCartao) {
+        this.numCartao = numCartao;
+    }
+
     @Override
     public boolean processarPagamento(double valorDaTransação) {
         return validacao();

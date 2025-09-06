@@ -1,12 +1,16 @@
 package br.edu.up;
 
-public class PagamentoCriptomoeda implements IPagamento {
+public class PagamentoCriptoMoeda implements IPagamento {
 
     public double saldoConta;
     public double valorDaUltimaTransacao;
 
-    @Override
+    
+    public PagamentoCriptoMoeda(double saldoConta) {
+        this.saldoConta = saldoConta;
+    }
 
+    @Override
     public boolean processarPagamento(double valorDaTransacao) {
         this.valorDaUltimaTransacao = valorDaTransacao;
         return validacao();

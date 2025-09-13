@@ -2,7 +2,7 @@ package br.edu.up;
 
 public class PagamentoService {
 
-    public void processarPagamento(PagamentoFactory pagamentoFactory, double valorDaTransacao) {
+    public void processarPagamento(PagamentoFactory pagamentoFactory, double valorDaTransacao) throws Exception {
         IPagamento pagamento = pagamentoFactory.criarPagamento();
 
         if (pagamento.processarPagamento(valorDaTransacao)) {

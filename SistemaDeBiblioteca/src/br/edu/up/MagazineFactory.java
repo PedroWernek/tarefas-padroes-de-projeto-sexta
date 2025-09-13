@@ -1,9 +1,9 @@
 package br.edu.up;
 
-public class MagazineFactory implements ILibraryFactory {
+public class MagazineFactory implements IFactoryBorrowable {
 
     @Override
-    public Borrowable create() {
+    public IBorrowable create() {
         return new Magazine();
     }
 

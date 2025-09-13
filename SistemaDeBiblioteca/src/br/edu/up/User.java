@@ -4,13 +4,13 @@ import java.util.List;
 
 public class User {
 
-    public List<Borrowable> borrowedItems;
+    public List<IBorrowable> borrowedItems;
 
-    public void borrow(Borrowable item) {
+    public void borrow(IBorrowable item) {
         item.borrow(item, this);
     }
 
-    public void returnItem(Borrowable item) {
+    public void returnItem(IBorrowable item) {
         item.returnItem(item, this);
     }
 }

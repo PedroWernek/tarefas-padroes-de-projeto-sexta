@@ -8,13 +8,16 @@ public class AccountManager {
 
     private final List<Account> accounts;
 
-    private AccountManager(List<Account> accounts) {
+    private AccountManager(List<Account> accounts, double saldo) {
         this.accounts = accounts;
+        for (Account account : this.accounts) {
+            account.saldo = saldo;
+        }
     }
 
-    public static AccountManager getInstance(List<Account> accounts) {
+    public static AccountManager getInstance(List<Account> accounts, double saldo) {
         if (AccountManager.instance == null) {
-            AccountManager.instance = new AccountManager(accounts);
+            AccountManager.instance = new AccountManager(accounts, saldo);
         }
         return AccountManager.instance;
     }
@@ -24,6 +27,9 @@ public class AccountManager {
 
         if (account != null) {
             account.saldo += valor;
+            System.out.println("Deposito de R$" + valor + " realizado com sucesso!");
+        } else {
+            System.out.println("Conta não encontrada");
         }
     }
 
@@ -31,7 +37,14 @@ public class AccountManager {
         Account account = findAccount(accountId);
 
         if (account != null) {
-            account.saldo -= valor;
+            if (account.saldo >= valor) {
+                account.saldo -= valor;
+                System.out.println("Saque de R$" + valor + " realizado com sucesso!");
+            } else {
+                System.out.println("Saldo insuficiente");
+            }
+        } else {
+            System.out.println("Conta não encontrada");
         }
     }
 
@@ -45,11 +58,13 @@ public class AccountManager {
         return 0;
     }
 
-    public List<Account> listarContasAtivas() {
-        return this.accounts;
+    public void listarContasAtivas() {
+        for (Account account : accounts) {
+            System.out.println(account.toString());
+        }
     }
 
-    private Account findAccount(String accountId) {
+    public Account findAccount(String accountId) {
         for (Account account : this.accounts) {
             if (account.accountId.equals(accountId)) {
                 return account;

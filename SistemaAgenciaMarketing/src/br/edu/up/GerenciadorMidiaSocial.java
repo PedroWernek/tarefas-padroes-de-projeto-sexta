@@ -1,9 +1,20 @@
 package br.edu.up;
 
-public interface GerenciadorMidiaSocial {
-  void AgendarPublicacao();
+import br.edu.up.adapter.absAdapterRedesSociais;
 
-  void publicarConteudo();
+public class GerenciadorMidiaSocial {
+   public absAdapterRedesSociais contexto;
 
-  boolean autenticar();
+   public GerenciadorMidiaSocial(absAdapterRedesSociais contexto){
+      this.setAdapter(contexto);
+   }
+
+   public void setAdapter(absAdapterRedesSociais contexto){
+      this.contexto = contexto;
+        
+   }
+
+   public void enviar(){
+      contexto.enviar();
+   }
 }

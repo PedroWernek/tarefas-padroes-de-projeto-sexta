@@ -1,15 +1,15 @@
 package br.edu.up;
 
-import br.edu.up.adapter.absAdapterRedesSociais;
+import br.edu.up.adapter.iAdapterRedesSociais;
 
-public class GerenciadorMidiaSocial {
-   public absAdapterRedesSociais contexto;
+public final class GerenciadorMidiaSocial {
+   public iAdapterRedesSociais contexto;
 
-   public GerenciadorMidiaSocial(absAdapterRedesSociais contexto){
+   public GerenciadorMidiaSocial(iAdapterRedesSociais contexto){
       this.setAdapter(contexto);
    }
 
-   public void setAdapter(absAdapterRedesSociais contexto){
+   public void setAdapter(iAdapterRedesSociais contexto){
       this.contexto = contexto;
         
    }

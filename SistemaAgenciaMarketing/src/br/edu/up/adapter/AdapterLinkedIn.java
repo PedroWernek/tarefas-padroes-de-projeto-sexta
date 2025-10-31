@@ -1,17 +1,16 @@
 package br.edu.up.adapter;
 
+import br.edu.up.API.APILinkedIn;
 import java.util.ArrayList;
 
-import br.edu.up.API.APILinkedIn;
-
-public class AdapterLinkedIn extends absAdapterRedesSociais{
-  public String payload;
+public class AdapterLinkedIn implements iAdapterRedesSociais{
   public APILinkedIn apiLinkedIn;
 
-  public AdapterLinkedIn(APILinkedIn apiLinkedIn){
+  public AdapterLinkedIn(APILinkedIn apiLinkedIn) {
     this.apiLinkedIn = apiLinkedIn;
   }
 
+  @Override
   public void enviar(){
     apiLinkedIn.publicarVaga("", new ArrayList<>());
   }

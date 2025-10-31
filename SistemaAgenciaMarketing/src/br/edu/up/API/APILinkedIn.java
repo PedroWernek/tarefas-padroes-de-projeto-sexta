@@ -1,10 +1,13 @@
 package br.edu.up.API;
 
+import br.edu.up.payloader.plLinkendIn;
 import java.util.List;
 
-public class APILinkedIn{
+public class APILinkedIn extends absAPI<plLinkendIn>{
 
-  public String chaveDeAcesso;
+    public APILinkedIn(plLinkendIn payload) {
+        super(payload);
+    }
   
   public void publicarVaga(String textoVaga, List<String> competecias) {
     System.out.println("Publicando a seguinte Vaga: " + textoVaga + "Com as seguintes competencias: \n");
@@ -12,7 +15,7 @@ public class APILinkedIn{
     StringBuilder sb = new StringBuilder();
 
     for (String competencia : competecias) {
-      sb.append("- " + competencia + ";\n");
+      sb.append("- ").append(competencia).append(";\n");
     }
     System.out.println(sb.toString());
   }

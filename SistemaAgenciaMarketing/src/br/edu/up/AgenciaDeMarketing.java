@@ -1,17 +1,13 @@
 package br.edu.up;
 
-import br.edu.up.API.APIInstagram;
-import br.edu.up.API.APILinkedIn;
-import br.edu.up.adapter.AdapterInstagram;
-import br.edu.up.adapter.AdapterLinkedIn;
+import br.edu.up.factory.SocialMidiaFactory;
 
 public class AgenciaDeMarketing {
     public static void main(String[] args) throws Exception {
-        GerenciadorMidiaSocial gerenciador = new GerenciadorMidiaSocial(new AdapterInstagram(new APIInstagram()));
+        GerenciadorMidiaSocial gerenciador = new GerenciadorMidiaSocial(SocialMidiaFactory.criarInstagram("apiKey"));
 
         gerenciador.enviar();
-        gerenciador.setAdapter(new AdapterLinkedIn(new APILinkedIn()));
-
+        gerenciador.setAdapter(SocialMidiaFactory.criarTikTok("conectionString"));
         gerenciador.enviar();
     }
 }

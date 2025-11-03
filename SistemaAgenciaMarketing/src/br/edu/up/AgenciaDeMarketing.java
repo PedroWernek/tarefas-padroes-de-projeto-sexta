@@ -2,16 +2,14 @@ package br.edu.up;
 
 import br.edu.up.factory.SocialMidiaFactory;
 
+import javax.swing.*;
+
 public class AgenciaDeMarketing {
 
     public static void main(String[] args) throws Exception {
         GerenciadorMidiaSocial gerenciador = new GerenciadorMidiaSocial(SocialMidiaFactory.criarInstagram("apiKey"));
 
-        MainFrame myFrame = new MainFrame();
-        myFrame.iniciar();
-
-        gerenciador.enviar();
-        gerenciador.setAdapter(SocialMidiaFactory.criarTikTok("conectionString"));
-        gerenciador.enviar();
+        JFrame mainFrame = new MainFrame("Tela Inicial", gerenciador);
+        mainFrame.setVisible(true);
     }
 }

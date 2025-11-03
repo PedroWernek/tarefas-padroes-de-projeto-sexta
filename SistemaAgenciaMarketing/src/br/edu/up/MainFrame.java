@@ -1,94 +1,69 @@
 package br.edu.up;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
+import br.edu.up.API.absAPI;
+import br.edu.up.factory.SocialMidiaFactory;
+import br.edu.up.payloader.plTwitter;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
+public class MainFrame extends JFrame{
+    private JPanel mainFrame;
+    private JButton postarButton;
+    private JTextField tfTituloPostagem;
+    private JTextField tfTextoPostagem;
+    private JComboBox comboBox1;
+    private JPanel Botoes;
+    private JPanel Titulo;
+    private JPanel Textos;
+    private JPanel pnTextoPostagem;
+    private JPanel pnTituloPostagem;
+    private JLabel lbTextoPostagem;
+    private JLabel lbTituloPostagem;
 
-public class MainFrame extends JFrame {
+    private GerenciadorMidiaSocial gerenciador;
 
-    private final Font mainFont = new Font("Calibri", Font.BOLD, 18);
-    JTextField tfFistName, tfLastName;
-    JLabel lbWelcome;
+    public MainFrame(String title, GerenciadorMidiaSocial gerenciador) throws HeadlessException {
+        super(title);
 
-    public void iniciar() {
+        this.gerenciador = gerenciador;
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setContentPane(mainFrame);
+        this.pack();
 
-        /**
-         * *************FORM PAINEL****************
-         */
-        JLabel lbFirstName = new JLabel("first Name");
-        lbFirstName.setFont(mainFont);
+        comboBox1.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                //verificando apenas quando o item é selecionado
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    String selectedItem = e.getItem().toString();
 
-        tfFistName = new JTextField();
-        tfFistName.setFont(mainFont);
-
-        JLabel lbLastName = new JLabel("first Name");
-        lbLastName.setFont(mainFont);
-
-        tfLastName = new JTextField();
-        tfLastName.setFont(mainFont);
-
-        JPanel formPanel = new JPanel();
-        formPanel.setLayout(new GridLayout(4, 1, 5, 5));
-        formPanel.setOpaque(false);
-        formPanel.add(lbFirstName);
-        formPanel.add(tfFistName);
-        formPanel.add(lbLastName);
-        formPanel.add(tfLastName);
-        /**
-         * *************Welcome Label****************
-         */
-        lbWelcome = new JLabel();
-        lbWelcome.setFont(mainFont);
-
-        /**
-         * *************Buttons Panel****************
-         */
-        JButton bntOK = new JButton("OK");
-        bntOK.setFont(mainFont);
-        bntOK.addActionListener((ActionEvent e) -> {
-            String firstName = tfFistName.getText();
-            String lastName = tfLastName.getText();
-            lbWelcome.setText("Hello" + firstName + " " + lastName);
+                    switch (selectedItem) {
+                        case "Instagram":
+                            gerenciador.setAdapter(SocialMidiaFactory.criarInstagram(""));
+                            break;
+                        case "LinkedIn":
+                            gerenciador.setAdapter(SocialMidiaFactory.criarLinkedIn(""));
+                            break;
+                        case "Twitter":
+                            gerenciador.setAdapter(SocialMidiaFactory.criarTwitter(new plTwitter("","")));
+                            break;
+                        case "TikTok":
+                            gerenciador.setAdapter(SocialMidiaFactory.criarTikTok(""));
+                            break;
+                    }
+                }
+            }
         });
-
-        JButton bntClear = new JButton("Clear");
-        bntClear.setFont(mainFont);
-        bntClear.addActionListener((ActionEvent e) -> {
-            tfFistName.setText("");
-            tfLastName.setText("");
-            lbWelcome.setText("");
+        postarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gerenciador.enviar();
+            }
         });
-        JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new GridLayout(1, 2, 5, 5));
-        buttonsPanel.setOpaque(false);
-        buttonsPanel.add(bntOK);
-        buttonsPanel.add(bntClear);
-
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBackground(new Color(128, 128, 255));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        mainPanel.add(formPanel, BorderLayout.NORTH);
-        mainPanel.add(lbWelcome, BorderLayout.CENTER);
-        mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
-
-        add(mainPanel);
-
-        setTitle("Welcome");
-        setSize(500, 600);
-        setMinimumSize(new Dimension(300, 400));
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
     }
 }

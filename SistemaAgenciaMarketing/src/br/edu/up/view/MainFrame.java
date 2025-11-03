@@ -1,7 +1,7 @@
 package br.edu.up.view;
 
 import br.edu.up.GerenciadorMidiaSocial;
-import br.edu.up.factory.SocialMidiaFactory;
+import br.edu.up.images.CaixaDeFerramentas;
 import br.edu.up.view.components.FabricPayload;
 
 import javax.swing.*;
@@ -11,9 +11,11 @@ import java.awt.event.ItemEvent;
 public class MainFrame extends JFrame{
 
     private JPanel mainFrame;
-    private JButton postarButton;
+    private JButton btnCriarPostagem;
     private JComboBox<String> comboBox1;
     private JPanel plPainel;
+    private String selectedItem = "Instagram";
+
 
     public MainFrame(String title, GerenciadorMidiaSocial gerenciador) throws HeadlessException {
         super(title);
@@ -21,38 +23,47 @@ public class MainFrame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainFrame);
         this.pack();
+        CaixaDeFerramentas.deixarTelaNoCentro(this);
 
         comboBox1.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                String selectedItem = e.getItem().toString();
-                atualizarPainelPayload(selectedItem,gerenciador);
+                this.selectedItem = e.getItem().toString();
+                atualizarPainelPayload(gerenciador);
             }
         });
         //iniciando com o instagram selecionado
         comboBox1.setSelectedItem("Instagram");
-        atualizarPainelPayload("Instagram", gerenciador);
+        atualizarPainelPayload(gerenciador);
 
+        btnCriarPostagem.addActionListener(e -> {
+            TelaDePublicacao telaDePublicacao = new TelaDePublicacao(selectedItem,gerenciador);
+            telaDePublicacao.setVisible(true);
+        });
     }
-        private void atualizarPainelPayload(String selectedItem, GerenciadorMidiaSocial gerenciador) {
-        plPainel.removeAll();
+        private void atualizarPainelPayload(GerenciadorMidiaSocial gerenciador) {
+            plPainel.removeAll();
 
-        plPainel.setLayout(new FlowLayout(FlowLayout.LEFT));
-                    switch (selectedItem) {
-                        case "Instagram":
-                            // Criar os componentes
-                            FabricPayload.plComponentIntagram(plPainel, gerenciador);
-                            break;
-                        case "LinkedIn":
-                            FabricPayload.plComponentLinkedIn(plPainel, gerenciador);
-                            break;
-                        case "Twitter":
-                            FabricPayload.plComponentTwitter(plPainel, gerenciador);
-                            break;
-                        case "TikTok":
-                            FabricPayload.plComponentTiktok(plPainel, gerenciador);
-                            break;
-                    }
-                    plPainel.revalidate();
-                    plPainel.repaint();
+            plPainel.setLayout(new FlowLayout(FlowLayout.LEFT));
+            switch (selectedItem) {
+                case "Instagram":
+                    CaixaDeFerramentas.encontrarRedmencionarImagem(plPainel, "src/br/edu/up/images/Instagram.png");
+                    FabricPayload.plComponentIntagram(plPainel, gerenciador);
+                    break;
+                case "LinkedIn":
+                    CaixaDeFerramentas.encontrarRedmencionarImagem(plPainel, "src/br/edu/up/images/LinkedIn.png");
+                    FabricPayload.plComponentLinkedIn(plPainel, gerenciador);
+                    break;
+                case "Twitter":
+                    CaixaDeFerramentas.encontrarRedmencionarImagem(plPainel, "src/br/edu/up/images/Twitter.png");
+                    FabricPayload.plComponentTwitter(plPainel, gerenciador);
+                    break;
+                case "TikTok":
+                    CaixaDeFerramentas.encontrarRedmencionarImagem(plPainel, "src/br/edu/up/images/TikTok.png");
+                    FabricPayload.plComponentTiktok(plPainel, gerenciador);
+                    break;
+            }
+            plPainel.revalidate();
+            plPainel.repaint();
         }
+
 }

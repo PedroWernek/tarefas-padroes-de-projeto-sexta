@@ -12,11 +12,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class MainFrame extends JFrame{
+
     private JPanel mainFrame;
     private JButton postarButton;
     private JTextField tfTituloPostagem;
     private JTextField tfTextoPostagem;
-    private JComboBox comboBox1;
+    private JComboBox<String> comboBox1;
     private JPanel Botoes;
     private JPanel Titulo;
     private JPanel Textos;
@@ -25,45 +26,38 @@ public class MainFrame extends JFrame{
     private JLabel lbTextoPostagem;
     private JLabel lbTituloPostagem;
 
-    private GerenciadorMidiaSocial gerenciador;
-
     public MainFrame(String title, GerenciadorMidiaSocial gerenciador) throws HeadlessException {
         super(title);
 
-        this.gerenciador = gerenciador;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainFrame);
         this.pack();
 
-        comboBox1.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                //verificando apenas quando o item é selecionado
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    String selectedItem = e.getItem().toString();
+        comboBox1.addItemListener(e -> {
+            //verificando apenas quando o item é selecionado
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                String selectedItem = e.getItem().toString();
 
-                    switch (selectedItem) {
-                        case "Instagram":
-                            gerenciador.setAdapter(SocialMidiaFactory.criarInstagram(""));
-                            break;
-                        case "LinkedIn":
-                            gerenciador.setAdapter(SocialMidiaFactory.criarLinkedIn(""));
-                            break;
-                        case "Twitter":
-                            gerenciador.setAdapter(SocialMidiaFactory.criarTwitter(new plTwitter("","")));
-                            break;
-                        case "TikTok":
-                            gerenciador.setAdapter(SocialMidiaFactory.criarTikTok(""));
-                            break;
-                    }
+                switch (selectedItem) {
+                    case "Instagram":
+                        gerenciador.setAdapter(SocialMidiaFactory.criarInstagram(""));
+                        break;
+                    case "LinkedIn":
+                        gerenciador.setAdapter(SocialMidiaFactory.criarLinkedIn(""));
+                        break;
+                    case "Twitter":
+                        gerenciador.setAdapter(SocialMidiaFactory.criarTwitter("",""));
+                        break;
+                    case "TikTok":
+                        gerenciador.setAdapter(SocialMidiaFactory.criarTikTok(""));
+                        break;
                 }
             }
         });
-        postarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gerenciador.enviar();
-            }
-        });
+        postarButton.addActionListener(e ->
+                if(gerenciador.contexto.) {
+            gerenciador.enviar();
+        }
+        );
     }
 }

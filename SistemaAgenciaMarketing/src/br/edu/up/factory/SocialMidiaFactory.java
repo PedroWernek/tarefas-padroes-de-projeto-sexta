@@ -28,7 +28,7 @@ public class SocialMidiaFactory {
         return new AdapterTikTok(new APITikTok(new plTiktok(conectionString)));
     }
 
-    public static iAdapterRedesSociais criarTwitter(plTwitter payload) {
-        return new AdapterTwitter(new APITwitter(payload));
+    public static iAdapterRedesSociais criarTwitter(String id, String pws) {
+        return new AdapterTwitter(new APITwitter(new plTwitter(id,pws)));
     }
 }

@@ -1,7 +1,9 @@
 package br.edu.up.adapter;
 
+import br.edu.up.data.Publicacao;
+
 public interface iAdapterRedesSociais {
 
-    void enviar();
+    void enviar(Publicacao publicacao);
 
 }

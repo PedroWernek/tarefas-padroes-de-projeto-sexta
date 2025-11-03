@@ -1,6 +1,8 @@
 package br.edu.up.adapter;
 
 import br.edu.up.API.APIInstagram;
+import br.edu.up.data.Publicacao;
+
 import java.util.ArrayList;
 
 public class AdapterInstagram implements iAdapterRedesSociais{
@@ -11,7 +13,7 @@ public class AdapterInstagram implements iAdapterRedesSociais{
   }
 
   @Override
-  public void enviar(){
+  public void enviar(Publicacao publicacao){
     apiInstagram.publicarReel("", "", new ArrayList<>());
   }
 }

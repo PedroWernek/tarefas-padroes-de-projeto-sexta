@@ -1,30 +1,17 @@
-package br.edu.up;
+package br.edu.up.view;
 
-import br.edu.up.API.absAPI;
+import br.edu.up.GerenciadorMidiaSocial;
 import br.edu.up.factory.SocialMidiaFactory;
-import br.edu.up.payloader.plTwitter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 public class MainFrame extends JFrame{
 
     private JPanel mainFrame;
     private JButton postarButton;
-    private JTextField tfTituloPostagem;
-    private JTextField tfTextoPostagem;
     private JComboBox<String> comboBox1;
-    private JPanel Botoes;
-    private JPanel Titulo;
-    private JPanel Textos;
-    private JPanel pnTextoPostagem;
-    private JPanel pnTituloPostagem;
-    private JLabel lbTextoPostagem;
-    private JLabel lbTituloPostagem;
 
     public MainFrame(String title, GerenciadorMidiaSocial gerenciador) throws HeadlessException {
         super(title);
@@ -55,9 +42,7 @@ public class MainFrame extends JFrame{
             }
         });
         postarButton.addActionListener(e ->
-                if(gerenciador.contexto.) {
-            gerenciador.enviar();
-        }
+            gerenciador.enviar()
         );
     }
 }

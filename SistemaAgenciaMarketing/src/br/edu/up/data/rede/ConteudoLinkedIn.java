@@ -7,8 +7,4 @@ import java.util.List;
 public class ConteudoLinkedIn implements absConteudo {
     public String textoVaga;
     public List<String> competecias;
-    @Override
-    public void criarConteudo() {
-
-    }
 }

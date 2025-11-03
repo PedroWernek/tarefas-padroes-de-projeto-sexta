@@ -1,6 +1,7 @@
 package br.edu.up;
 
 import br.edu.up.factory.SocialMidiaFactory;
+import br.edu.up.view.MainFrame;
 
 import javax.swing.*;
 

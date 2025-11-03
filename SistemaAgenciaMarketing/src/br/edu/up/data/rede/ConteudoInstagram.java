@@ -9,8 +9,4 @@ public class ConteudoInstagram implements absConteudo {
     public String video;
     public List<String> hashtags;
 
-    @Override
-    public void criarConteudo() {
-
-    }
 }

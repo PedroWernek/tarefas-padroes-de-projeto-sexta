@@ -9,8 +9,4 @@ public class ConteudoTiktok implements absConteudo {
     public String subtitle;
     public List<String> hashtags;
 
-    @Override
-    public void criarConteudo() {
-
-    }
 }

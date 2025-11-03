@@ -13,6 +13,7 @@ public class AdapterTwitter implements iAdapterRedesSociais{
   }
   @Override
   public void enviar(Publicacao publicacao){
-    apiTwitter.publicarTwitch(publicacao((ConteudoTwitter).conteudo).texto), "");
+    ConteudoTwitter conteudoTwitter = (ConteudoTwitter) publicacao.conteudo;
+    apiTwitter.publicarTwitch(conteudoTwitter.texto, conteudoTwitter.imagem);
   }
 }

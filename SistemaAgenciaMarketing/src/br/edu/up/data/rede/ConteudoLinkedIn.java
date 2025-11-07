@@ -7,4 +7,9 @@ import java.util.List;
 public class ConteudoLinkedIn implements absConteudo {
     public String textoVaga;
     public List<String> competecias;
+
+    public ConteudoLinkedIn(String textoVaga, List<String> competecias) {
+        this.textoVaga = textoVaga;
+        this.competecias = competecias;
+    }
 }

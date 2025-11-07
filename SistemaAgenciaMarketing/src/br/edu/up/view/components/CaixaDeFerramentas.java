@@ -1,8 +1,10 @@
-package br.edu.up.images;
+package br.edu.up.view.components;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -34,5 +36,14 @@ public class CaixaDeFerramentas {
 
         // Set the location of the frame
         frame.setLocation(x, y);
+    }
+
+    public static void caixaDeAviso(String titulo, String texto) {
+        JFrame caixa = new JFrame();
+
+        JOptionPane.showMessageDialog(caixa,
+                        texto,
+                        titulo,
+                        JOptionPane.INFORMATION_MESSAGE);
     }
 }

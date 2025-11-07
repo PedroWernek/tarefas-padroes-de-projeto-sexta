@@ -9,4 +9,9 @@ public class ConteudoInstagram implements absConteudo {
     public String video;
     public List<String> hashtags;
 
+    public ConteudoInstagram(String subtitle, String video, List<String> hashtags) {
+        this.subtitle = subtitle;
+        this.video = video;
+        this.hashtags = hashtags;
+    }
 }

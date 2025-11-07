@@ -16,8 +16,12 @@ public class FabricPayload {
         btnSalvarApi.setText("Mandar chave API");
         plPainel.add(btnSalvarApi);
         btnSalvarApi.addActionListener(f -> {
-            gerenciador.setAdapter(SocialMidiaFactory.criarInstagram(tfApiKey.getText()));
-        });
+            if(!tfApiKey.getText().isEmpty()) {
+                gerenciador.setAdapter(SocialMidiaFactory.criarInstagram(tfApiKey.getText()));
+            }else{
+                CaixaDeFerramentas.caixaDeAviso("AVISO!", "Preencha a chave de API primeiro!");
+            }
+            });
     }
     public static void plComponentLinkedIn(JPanel plPainel, GerenciadorMidiaSocial gerenciador){
         JLabel lbChaveDeAcesso = new JLabel("Chave de Acesso:");
@@ -29,7 +33,11 @@ public class FabricPayload {
         btnSalvarChaveDeAcesso.setText("Mandar chave de Acesso");
         plPainel.add(btnSalvarChaveDeAcesso);
         btnSalvarChaveDeAcesso.addActionListener(f -> {
+            if(!tfChaveDeAcesso.getText().isEmpty()){
             gerenciador.setAdapter(SocialMidiaFactory.criarLinkedIn(tfChaveDeAcesso.getText()));
+            }else{
+                CaixaDeFerramentas.caixaDeAviso("AVISO!", "Preencha a chave de acesso primeiro!");
+            }
         });
     }
     public static void plComponentTiktok(JPanel plPainel, GerenciadorMidiaSocial gerenciador){
@@ -42,7 +50,11 @@ public class FabricPayload {
         btnSalvarConectionString.setText("Mandar ConectionString");
         plPainel.add(btnSalvarConectionString);
         btnSalvarConectionString.addActionListener(f -> {
+         if(!tfConectionString.getText().isEmpty()){
             gerenciador.setAdapter(SocialMidiaFactory.criarTikTok(tfConectionString.getText()));
+        }else{
+            CaixaDeFerramentas.caixaDeAviso("AVISO!", "Preencha a connectionString primeiro!");
+        }
         });
     }
     public static void plComponentTwitter(JPanel plPainel, GerenciadorMidiaSocial gerenciador){
@@ -60,7 +72,11 @@ public class FabricPayload {
         btnSalvarInformacoes.setText("Mandar informações");
         plPainel.add(btnSalvarInformacoes);
         btnSalvarInformacoes.addActionListener(f -> {
-            gerenciador.setAdapter(SocialMidiaFactory.criarTwitter(tfId.getText(), tfPws.getText()));
-        });
+            if(!tfId.getText().isEmpty() && !tfPws.getText().isEmpty()){
+                gerenciador.setAdapter(SocialMidiaFactory.criarTwitter(tfId.getText(), tfPws.getText()));
+            }else{
+                CaixaDeFerramentas.caixaDeAviso("AVISO!", "Preencha O id e Pws primeiro!");
+            }
+            });
     }
 }

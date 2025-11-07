@@ -1,18 +1,27 @@
 package br.edu.up.view;
 
 import br.edu.up.GerenciadorMidiaSocial;
-import br.edu.up.images.CaixaDeFerramentas;
+import br.edu.up.data.Publicacao;
+import br.edu.up.data.rede.ConteudoInstagram;
+import br.edu.up.data.rede.ConteudoLinkedIn;
+import br.edu.up.data.rede.ConteudoTiktok;
+import br.edu.up.data.rede.ConteudoTwitter;
+import br.edu.up.view.components.CaixaDeFerramentas;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TelaDePublicacao extends JFrame{
     private JPanel telaPublicacao;
     private JButton btnCancelar;
     private JButton btnPublicar;
-    private JLabel lbCriadorPostagem;
-    private JPanel btnPostagem;
     private JPanel pnCompPostagem;
+    private JPanel btnPostagem;
+    private JLabel lbCriadorPostagem;
+    private final Publicacao publicacao = new Publicacao();
 
     public TelaDePublicacao(String selectedItem, GerenciadorMidiaSocial gerenciadorMidiaSocial) throws HeadlessException {
         super(selectedItem);
@@ -20,38 +29,41 @@ public class TelaDePublicacao extends JFrame{
         this.setContentPane(telaPublicacao);
         this.pack();
         CaixaDeFerramentas.deixarTelaNoCentro(this);
-        pnCompPostagem.setLayout(new GridLayout(0, 2, 5, 5));
+        pnCompPostagem.setLayout(new GridLayout(4, 2, 5, 5));
 
         switch (selectedItem) {
             case "Instagram":
-                criarCaixarInstagram();
+                criarCaixaInstagram(gerenciadorMidiaSocial);
                 break;
             case "LinkedIn":
-                criarCaixarLinkedIn();;
+                criarCaixaLinkedIn(gerenciadorMidiaSocial);;
                 break;
             case "Twitter":
-                criarCaixarTwitter();
+                criarCaixaTwitter(gerenciadorMidiaSocial);
                 break;
             case "TikTok":
-                criarCaixarTiktok();
+                criarCaixaTiktok(gerenciadorMidiaSocial);
                 break;
         }
 
         pnCompPostagem.revalidate();
         pnCompPostagem.repaint();
 
+        btnCancelar.addActionListener(c -> {
+            this.dispose();
+        });
+
     }
 
-    private void criarCaixarInstagram(){
+    private void criarCaixaInstagram(GerenciadorMidiaSocial gerenciadorMidiaSocial){
 
-        JLabel lbSubtitulo = new JLabel("Subtitulo");
+        JLabel lbSubtitulo = new JLabel("Subtitulo:");
         JTextField tfSubtitulo = new JTextField();
 
-        JLabel lbVideo = new JLabel("Video");
+        JLabel lbVideo = new JLabel("Video:");
         JTextField tfVideo = new JTextField();
-        tfVideo.setBounds(1,1,100,100);
 
-        JLabel lbHashtags = new JLabel("Hashtags - separe por virgula");
+        JLabel lbHashtags = new JLabel("Hashtags - separe por virgula:");
         JTextField tfHashtags = new JTextField();
 
         pnCompPostagem.add(lbSubtitulo);
@@ -61,9 +73,19 @@ public class TelaDePublicacao extends JFrame{
         pnCompPostagem.add(lbHashtags);
         pnCompPostagem.add(tfHashtags);
 
-    }
-    private void criarCaixarLinkedIn(){
+        btnPublicar.addActionListener(p -> {
+            String[] tfText = tfHashtags.getText().split(",");
+            List<String> hashtags = new ArrayList<>(Arrays.asList(tfText));
+        if(!tfVideo.getText().isEmpty() || !tfSubtitulo.getText().isEmpty() ) {
+            publicacao.conteudo = new ConteudoInstagram(tfSubtitulo.getText(), tfVideo.getText(),hashtags);
+            postar(gerenciadorMidiaSocial);
+        }else{
+            CaixaDeFerramentas.caixaDeAviso("Aviso!","Video ou subtitulo vazio!");
+        }
+        });
 
+    }
+    private void criarCaixaLinkedIn(GerenciadorMidiaSocial gerenciadorMidiaSocial){
 
         JLabel lbTextoVaga = new JLabel("Texto Vaga");
         JTextField tfTextoVaga = new JTextField();
@@ -76,16 +98,25 @@ public class TelaDePublicacao extends JFrame{
         pnCompPostagem.add(lbCompetencias);
         pnCompPostagem.add(tfCompetencias);
 
+        btnPublicar.addActionListener(p -> {
+            String[] tfText = tfCompetencias.getText().split(",");
+            List<String> competencias = new ArrayList<>(Arrays.asList(tfText));
+            if(!tfTextoVaga.getText().isEmpty()) {
+                publicacao.conteudo = new ConteudoLinkedIn(tfTextoVaga.getText(), competencias);
+                postar(gerenciadorMidiaSocial);
+            }else{
+                CaixaDeFerramentas.caixaDeAviso("Aviso!","texto da vaga vazio!");
+            }
+            });
+
     }
-    private void criarCaixarTiktok(){
-        pnCompPostagem.setLayout(new GridLayout(0, 2, 5, 5));
+    private void criarCaixaTiktok(GerenciadorMidiaSocial gerenciadorMidiaSocial){
 
         JLabel lbSubtitulo = new JLabel("Subtitulo");
         JTextField tfSubtitulo = new JTextField();
 
         JLabel lbVideo = new JLabel("Video");
         JTextField tfVideo = new JTextField();
-        tfVideo.setBounds(1,1,100,100);
 
         JLabel lbHashtags = new JLabel("Hashtags - separe por virgula");
         JTextField tfHashtags = new JTextField();
@@ -97,22 +128,45 @@ public class TelaDePublicacao extends JFrame{
         pnCompPostagem.add(lbHashtags);
         pnCompPostagem.add(tfHashtags);
 
+        btnPublicar.addActionListener(p -> {
+            String[] tfText = tfHashtags.getText().split(",");
+            List<String> hashtags = new ArrayList<>(Arrays.asList(tfText));
+            if(!tfVideo.getText().isEmpty() || !tfSubtitulo.getText().isEmpty()) {
+            publicacao.conteudo = new ConteudoTiktok(tfVideo.getText(), tfSubtitulo.getText(),hashtags);
+            postar(gerenciadorMidiaSocial);
+        }else{
+            CaixaDeFerramentas.caixaDeAviso("Aviso!","Video ou subtitulo vazio!");
+        }
+        });
+
     }
-    private void criarCaixarTwitter(){
-        pnCompPostagem.setLayout(new GridLayout(0, 2, 5, 5));
+    private void criarCaixaTwitter(GerenciadorMidiaSocial gerenciadorMidiaSocial){
 
         JLabel lbTexto = new JLabel("Texto");
         JTextField tfTexto = new JTextField();
 
         JLabel lbImagem = new JLabel("Imagem");
         JTextField tfImagem = new JTextField();
-        tfImagem.setBounds(1,1,100,100);
 
         pnCompPostagem.add(lbTexto);
         pnCompPostagem.add(tfTexto);
         pnCompPostagem.add(lbImagem);
         pnCompPostagem.add(tfImagem);
 
+        btnPublicar.addActionListener(p -> {
+            if(!tfTexto.getText().isEmpty()) {
+            publicacao.conteudo = new ConteudoTwitter(tfTexto.getText(), tfImagem.getText());
+            postar(gerenciadorMidiaSocial);
+            }else{
+                CaixaDeFerramentas.caixaDeAviso("Aviso!","Postagem vazia!");
+            }
+        });
 
+
+    }
+
+    private void postar(GerenciadorMidiaSocial gerenciadorMidiaSocial){
+        gerenciadorMidiaSocial.setPublicacao(publicacao);
+        gerenciadorMidiaSocial.enviar();
     }
 }

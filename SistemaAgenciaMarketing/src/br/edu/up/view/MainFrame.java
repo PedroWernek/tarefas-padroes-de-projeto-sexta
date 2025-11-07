@@ -1,7 +1,7 @@
 package br.edu.up.view;
 
 import br.edu.up.GerenciadorMidiaSocial;
-import br.edu.up.images.CaixaDeFerramentas;
+import br.edu.up.view.components.CaixaDeFerramentas;
 import br.edu.up.view.components.FabricPayload;
 
 import javax.swing.*;
@@ -28,7 +28,7 @@ public class MainFrame extends JFrame{
         comboBox1.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 this.selectedItem = e.getItem().toString();
-                atualizarPainelPayload(gerenciador);
+                    atualizarPainelPayload(gerenciador);
             }
         });
         //iniciando com o instagram selecionado
@@ -36,12 +36,17 @@ public class MainFrame extends JFrame{
         atualizarPainelPayload(gerenciador);
 
         btnCriarPostagem.addActionListener(e -> {
-            TelaDePublicacao telaDePublicacao = new TelaDePublicacao(selectedItem,gerenciador);
-            telaDePublicacao.setVisible(true);
+            if(gerenciador.contexto != null) {
+                TelaDePublicacao telaDePublicacao = new TelaDePublicacao(selectedItem, gerenciador);
+                telaDePublicacao.setVisible(true);
+            }else {
+                CaixaDeFerramentas.caixaDeAviso("ALERTA!","Preenchar as informações primeiro!");
+            }
         });
     }
         private void atualizarPainelPayload(GerenciadorMidiaSocial gerenciador) {
             plPainel.removeAll();
+            gerenciador.contexto = null;
 
             plPainel.setLayout(new FlowLayout(FlowLayout.LEFT));
             switch (selectedItem) {

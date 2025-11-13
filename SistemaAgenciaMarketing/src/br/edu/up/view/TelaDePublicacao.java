@@ -80,7 +80,7 @@ public class TelaDePublicacao extends JFrame{
             publicacao.conteudo = new ConteudoInstagram(tfSubtitulo.getText(), tfVideo.getText(),hashtags);
             postar(gerenciadorMidiaSocial);
         }else{
-            CaixaDeFerramentas.caixaDeAviso("Aviso!","Video ou subtitulo vazio!");
+            CaixaDeFerramentas.caixaDeAviso("Aviso!","Video ou subtitulo  vazio!");
         }
         });
 
